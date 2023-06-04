@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Aggiungi una nuova pizza</h1>
+	<form method="post">
+		<label>Nome</label>
+		<input type="text" name="name">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('name')}">
+			[[ ${errors.getFieldError('name').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Descrizione</label>
+		<input type="text" name="description">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('description')}">
+			[[ ${errors.getFieldError('description').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Url foto</label>
+		<input type="text" name="img">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('img')}">
+			[[ ${errors.getFieldError('img').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Prezzo</label>
+		<input type="number" name="price">
+		<label style="color: red" th:if="${errors != null && errors.hasFieldErrors('price')}">
+			[[ ${errors.getFieldError('price').defaultMessage} ]]
+		</label>
+		<br>
+		<input type="submit" value="create"> 
+	</form>
+</body>
+</html>
