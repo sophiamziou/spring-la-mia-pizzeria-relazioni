@@ -41,8 +41,12 @@ public class PizzaController {
 
 		Optional<Pizza> pizzaOpt = pizzaService.findById(id);
 		Pizza pizza = pizzaOpt.get();
-
+		
+		Optional<Pizza> optPizzaId = pizzaService.findByIdWithDiscount(id);
+		Pizza special_offer_pizza = optPizzaId.get();
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("discounts", special_offer_pizza.getDiscount());
 
 		return "show";
 	}

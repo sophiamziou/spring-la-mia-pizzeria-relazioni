@@ -14,6 +14,12 @@
 				</h3>
 				<img width="200px" th:src="${ pizza.img }">
 			</div>
+			<a href="#">Aggiungi una nuova offerta speciale</a>
+			<h5 th:if="${discounts.isEmpty()}">Nessuna offerta per questa pizza</h5>
+			<h5 th:unless="${discounts.isEmpty()}">Offerte speciali:</h5>
+			<div th:each="discount : ${discounts}" th:object="${discount}">
+				<p>[[ *{title} ]] - [[ *{rate} ]]%</p>
+			</div>
 		</div>
 	</div>
 </body>
