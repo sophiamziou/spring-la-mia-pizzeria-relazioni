@@ -74,9 +74,7 @@ public class PizzaController {
 			for (ObjectError err : bindingResult.getAllErrors()) 
 				System.err.println("error: " + err.getDefaultMessage());
 			
-			model.addAttribute("pizza", pizza);
 			model.addAttribute("errors", bindingResult);
-			
 			model.addAttribute("pizza", pizza);
 			
 			return "pizza-create";
@@ -108,10 +106,19 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/pizza/update/{id}")
-	public String updatePizza(Model model, @PathVariable("id") int id, @ModelAttribute Pizza pizza) {
-		 
-		pizzaService.save(pizza);
+	public String updatePizza(Model model, @PathVariable("id") int id, @Valid @ModelAttribute Pizza pizza, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			
+			for (ObjectError err : bindingResult.getAllErrors()) 
+				System.err.println("error: " + err.getDefaultMessage());
+			
+			model.addAttribute("errors", bindingResult);
+			model.addAttribute("pizza", pizza);
+			
+			return "pizza-create";
+		}
 		
-	    return "redirect:/";
+		pizzaService.save(pizza);
+		return "redirect:/";
 	}
 }
