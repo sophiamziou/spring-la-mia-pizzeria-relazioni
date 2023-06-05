@@ -1,10 +1,14 @@
 package org.java.demo.pojo;
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Pizza {
@@ -14,12 +18,12 @@ public class Pizza {
 	private int id;
 	
 	private String name;
-
 	private String description;
-
 	private String img;
-	
 	private double price;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<Discount> discount;
 	
 	public Pizza() {}
 	public Pizza(String name, String description, String img, double price) {
@@ -29,6 +33,12 @@ public class Pizza {
 		setPrice(price);
 	}
 	
+	public List<Discount> getDiscount() {
+		return discount;
+	}
+	public void setDiscount(List<Discount> discount) {
+		this.discount = discount;
+	}
 	public int getId() {
 		return id;
 	}
